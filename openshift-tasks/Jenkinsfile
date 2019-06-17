@@ -58,6 +58,8 @@ podTemplate(
         echo "Running Unit Tests"
 
         sh "${mvnCmd} test"
+
+        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
       }
 
       // Using Maven to call SonarQube for Code Analysis
