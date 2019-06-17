@@ -6,7 +6,7 @@ podTemplate(
   containers: [
     containerTemplate(
       name: "jnlp",
-      image: "docker-registry.default.svc:5000/${GUID}-jenkins/jenkins-agent-appdev",
+      image: "docker-registry.default.svc:5000/b46c-jenkins/jenkins-agent-appdev",
       resourceRequestMemory: "1Gi",
       resourceLimitMemory: "2Gi",
       resourceRequestCpu: "1",
@@ -165,9 +165,6 @@ podTemplate(
 
               // Update the Image on the Production Deployment Config
               def dc = openshift.selector("dc/${destApp}").object()
-
-              // OpenShift 4
-              dc.spec.template.spec.containers[0].image="image-registry.openshift-image-registry.svc:5000/${devProject}/tasks:${prodTag}"
 
               openshift.apply(dc)
 
